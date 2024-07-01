@@ -2,7 +2,7 @@ const eventModel = require('../../backend/mongo/schemas/events')
 const userModel = require('../../backend/mongo/schemas/users')
 
 function getCurrentEvent () {
-    return eventModel.find({status: 'ongoing'}, {}, {lean: true})
+    return eventModel.findOne({status: 'ongoing'}, {}, {lean: true})
 }
 
 function getRewardsInfo (userId) {

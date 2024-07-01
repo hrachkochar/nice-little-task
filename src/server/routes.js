@@ -3,6 +3,7 @@ const eventRoutes = require('../modules/events/routes')
 const scoreRoutes = require('../modules/scoring/routes')
 const Auth = require('../common/middleware/auth')
 const router = require('express').Router()
+const { tryCatchWrapper } = require('../common/wrappers')
 
 const apiRoutes = [
     {
@@ -11,11 +12,11 @@ const apiRoutes = [
     },
     {
         route: '/event',
-        module: [Auth.verifyToken, eventRoutes]
+        module: [tryCatchWrapper(Auth.verifyToken), eventRoutes]
     },
     {
         route: '/score',
-        module: [Auth.verifyToken, scoreRoutes]
+        module: [tryCatchWrapper(Auth.verifyToken), scoreRoutes]
     }
 ]
 

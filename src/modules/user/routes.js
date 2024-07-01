@@ -2,12 +2,13 @@ const express = require('express')
 const router = express.Router()
 const middleware = require('./middleware')
 const controller = require('./controller')
+const { tryCatchWrapper } = require("../../common/wrappers")
 
 router.route('/login')
-    .post(middleware.login, controller.login)
+    .post(tryCatchWrapper(middleware.login), tryCatchWrapper(controller.login))
 
 router.route('/register')
-    .post(middleware.register, controller.register)
+    .post(tryCatchWrapper(middleware.register), tryCatchWrapper(controller.register))
 
 
 module.exports = router

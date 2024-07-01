@@ -18,7 +18,7 @@ const createEvent = async () => {
     myEventEmitter.emit('eventCreated', event)
 }
 
-closeEvent = async (eventId) => {
+const closeEvent = async (eventId) => {
     console.log('Closing event')
     const event = await eventModel.findOneAndUpdate({_id: eventId }, { status: 'ended' }, { lean: true, new: true })
     await scoreService.aggregateAllScoresAfterEvent(eventId)

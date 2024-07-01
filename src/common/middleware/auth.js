@@ -9,7 +9,8 @@ async function verifyToken (req, res, next) {
         if (!token) return res.json({message: 'Token not Provided'})
         const verification = await jwt.verify(token, secretKey)
         console.log(verification)
-        req.user = await User.findOne({ _id: verification._id })
+        const user = await User.findOne({ _id: verification._id })
+        if (!user) return res.json({message: 'User not found or user is deleted or some other error with user existence'})
         return next()
     } catch (error) {
         console.log(error)

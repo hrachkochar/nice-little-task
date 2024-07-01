@@ -1,4 +1,3 @@
-const userModel = require('../../backend/mongo/schemas/users')
 
 async function userTookRewards (req, res, next) {
     try {

@@ -4,7 +4,6 @@ const mongoConnection = require('../backend/mongo/connect')
 const eventModel = require('../backend/mongo/schemas/events')
 const gameEventManager = require('../schedulers/eventManager')
 
-console.log('env:', process.env.NODE_ENV)
 const initialize = async () => {
     const mongoDb = await mongoConnection()
     if (mongoDb.readyState === 1) {

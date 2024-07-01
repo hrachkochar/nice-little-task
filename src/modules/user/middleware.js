@@ -9,7 +9,6 @@ async function login (req, res, next) {
         return res.status(400).json({message: 'Username is required'})
     }
     const user = await service.getUserByUsername(username)
-    console.log(user)
     if (!user) {
         return res.status(401).json({message: 'username or password is incorrect'})
     }

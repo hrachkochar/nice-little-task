@@ -17,7 +17,7 @@ const initialize = async () => {
     } else {
         setTimeout(() => gameEventManager.emit('closeEvent', currentEvent._id), currentEvent.end_time.getTime() - Date.now())
     }
-    serverStartEventEmitter.emit('initialization successful', null, { status: 'connected' })
+    serverStartEventEmitter.emit('initialization successful')
 }
 
 initialize()

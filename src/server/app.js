@@ -2,7 +2,7 @@ const express = require('express')
 const useragent = require('express-useragent')
 const http = require('http')
 const routes = require('./routes')
-const eventScheduler = require("../schedulers/eventManager");
+const userModel = require('../backend/mongo/schemas/users')
 
 // Configuration
 const port = process.env.APP_PORT || '3005'
@@ -21,6 +21,7 @@ app.get('/health', (req, res) => {
 
 app.get('/ready', async (req, res) => {
     try {
+        await userModel.findOne({}, {}, { lean: true })
         res.status(200).json({
             status: 'OK',
             timestamp: new Date().toISOString()
@@ -37,8 +38,6 @@ app.get('/ready', async (req, res) => {
 
 // API routes
 app.use('/api/v1', routes)
-
-
 
 // Catch-all for unhandled routes
 app.use((req, res) => {

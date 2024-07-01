@@ -6,8 +6,10 @@ async function currentEvent (req, res) {
 }
 
 async function claimRewards (req, res) {
-    await service.claimRewards(req.user)
-    res.status(200).json({ message: 'Rewards claimed successfully' })
+    const rewards = await service.claimRewards(req.user)
+    console.log(rewards)
+    if (!rewards.user_needs_rewards_for_last_event) return res.status(400).json({ message: 'Rewards already claimed' })
+    return res.status(200).json({ message: 'Rewards claimed successfully' })
 }
 
 module.exports = {

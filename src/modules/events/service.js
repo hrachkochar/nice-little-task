@@ -9,8 +9,8 @@ function getRewardsInfo (userId) {
     return userModel.findById(userId, 'user_needs_rewards_for_last_event', {lean: true})
 }
 
-function claimRewards (user) {
-    return userModel.findByIdAndUpdate(user._id, { user_needs_rewards_for_last_event: null }, { lean: true })
+function claimRewards (userId) {
+    return userModel.findByIdAndUpdate(userId, { user_needs_rewards_for_last_event: null }, { lean: true })
 }
 
 module.exports = {
